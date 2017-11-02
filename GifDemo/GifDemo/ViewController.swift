@@ -75,8 +75,8 @@ extension ViewController {
             let index = images?.index(of: image)
             let imageData: Data = UIImagePNGRepresentation(image)!
             let docs = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            let documentsDirectory = docs[0] as String
-            let imagePath = documentsDirectory + "\(index ?? 0)" + ".png"
+            let documentsDirectory: String = docs[0] as String
+            let imagePath = documentsDirectory + "/shopping\(index ?? 0)" + ".png"
             try? imageData.write(to: URL.init(fileURLWithPath: imagePath), options: [.atomic])
             print(imagePath)
         }
