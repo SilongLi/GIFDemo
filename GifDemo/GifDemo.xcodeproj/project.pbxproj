@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		993509981FAB6B3400CEB2A5 /* pikaqiu.gif in Resources */ = {isa = PBXBuildFile; fileRef = 993509961FAB6A8300CEB2A5 /* pikaqiu.gif */; };
+		993509991FAB6B3400CEB2A5 /* shopping.gif in Resources */ = {isa = PBXBuildFile; fileRef = 993509971FAB6A8300CEB2A5 /* shopping.gif */; };
 		99D145821FA9B51C007B17A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D145811FA9B51C007B17A3 /* AppDelegate.swift */; };
 		99D145841FA9B51C007B17A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D145831FA9B51C007B17A3 /* ViewController.swift */; };
 		99D145871FA9B51C007B17A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D145851FA9B51C007B17A3 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		993509961FAB6A8300CEB2A5 /* pikaqiu.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pikaqiu.gif; sourceTree = "<group>"; };
+		993509971FAB6A8300CEB2A5 /* shopping.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shopping.gif; sourceTree = "<group>"; };
 		99D1457E1FA9B51C007B17A3 /* GifDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GifDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99D145811FA9B51C007B17A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99D145831FA9B51C007B17A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,7 +26,6 @@
 		99D145881FA9B51C007B17A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99D1458B1FA9B51C007B17A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99D1458D1FA9B51C007B17A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		99D145931FA9B57D007B17A3 /* shopping.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shopping.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +58,8 @@
 		99D145801FA9B51C007B17A3 /* GifDemo */ = {
 			isa = PBXGroup;
 			children = (
-				99D145931FA9B57D007B17A3 /* shopping.gif */,
+				993509961FAB6A8300CEB2A5 /* pikaqiu.gif */,
+				993509971FAB6A8300CEB2A5 /* shopping.gif */,
 				99D145811FA9B51C007B17A3 /* AppDelegate.swift */,
 				99D145831FA9B51C007B17A3 /* ViewController.swift */,
 				99D145851FA9B51C007B17A3 /* Main.storyboard */,
@@ -125,6 +129,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993509981FAB6B3400CEB2A5 /* pikaqiu.gif in Resources */,
+				993509991FAB6B3400CEB2A5 /* shopping.gif in Resources */,
 				99D1458C1FA9B51C007B17A3 /* LaunchScreen.storyboard in Resources */,
 				99D145891FA9B51C007B17A3 /* Assets.xcassets in Resources */,
 				99D145871FA9B51C007B17A3 /* Main.storyboard in Resources */,

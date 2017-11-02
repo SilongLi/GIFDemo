@@ -15,10 +15,10 @@ class ViewController: UIViewController {
         
         // 1. 读取gif图片为data数据
         let gifData = self.loadGifInLocal(gifName: "shopping")
-        
+
         // 2. 生成image图片数据
         let images = self.createImage(gifData: gifData)
-        
+
         // 3. 把图片保存到本地沙盒
         self.saveImageToLocal(imageArray: images as? Array<UIImage>)
     }
@@ -34,10 +34,14 @@ extension ViewController {
             return nil
         }
         
-        let gifPath: String = Bundle.main.path(forResource: gifName, ofType: "gif") as? String ?? ""
-        var gifData: Data   = Data.init()
+        let gifPath = Bundle.main.path(forResource: gifName, ofType: "gif")
+        guard gifPath != nil else {
+            print("文件名为" + gifName! + "的gif图不存在！")
+            return nil
+        }
+        var gifData: Data = Data.init()
         do {
-            gifData = try Data.init(contentsOf: URL.init(fileURLWithPath: gifPath))
+            gifData = try Data.init(contentsOf: URL.init(fileURLWithPath: gifPath!))
         } catch {
             print(error)
         }
@@ -71,7 +75,7 @@ extension ViewController {
             let index = images?.index(of: image)
             let imageData: Data = UIImagePNGRepresentation(image)!
             let docs = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            let documentsDirectory = docs.first! as String
+            let documentsDirectory = docs[0] as String
             let imagePath = documentsDirectory + "\(index ?? 0)" + ".png"
             try? imageData.write(to: URL.init(fileURLWithPath: imagePath), options: [.atomic])
             print(imagePath)
