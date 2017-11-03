@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         let images = self.createImage(gifData: gifData)
 
         // 3. 把图片保存到本地沙盒
-        self.saveImageToLocal(imageArray: images as? Array<UIImage>)
+        self.saveImagesToLocal(imageArray: images as? Array<UIImage>)
     }
 }
 
@@ -66,7 +66,7 @@ extension ViewController {
     }
     
     // 将image图片保存到本地沙盒
-    func saveImageToLocal(imageArray images: Array<UIImage>?) -> () {
+    func saveImagesToLocal(imageArray images: Array<UIImage>?) -> () {
         guard images?.count != 0 else {
             return
         }
