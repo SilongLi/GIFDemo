@@ -15,7 +15,7 @@
 ### 1、GIF分解单帧图片
 #### GIF图片分解的过程 
 
-![GIF图片分解的过程](https://github.com/SilongLi/ColorPickerView/raw/master/GIFDemo/GIF/shots/GIFDecomposeProcess.png)
+![GIF图片分解的过程](https://github.com/SilongLi/GifDemo/raw/master/shots/GIFDecomposeProcess.png)
 
 ##### 整个过程分为5个模块、4个过程，分别如下。
 - （1）本地读取GIF图片，将其转换为NSData数据类型；
@@ -99,6 +99,6 @@
 
 - GIF图片分解最终实现效果  
 
-![GIF图片分解最终实现效果](https://github.com/SilongLi/ColorPickerView/raw/master/GIFDemo/GIF/shots/shppingImage.png)
+![GIF图片分解最终实现效果](https://github.com/SilongLi/GifDemo/raw/master/shots/shppingImage.png)
 
 
