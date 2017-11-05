@@ -65,7 +65,7 @@ extension ViewController {
         return images
     }
     
-    // 将image图片保存到本地沙盒
+    /// 将image图片保存到本地沙盒
     func saveImagesToLocal(imageArray images: Array<UIImage>?) -> () {
         guard images?.count != 0 else {
             return
