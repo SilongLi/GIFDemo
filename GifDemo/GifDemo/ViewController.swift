@@ -13,20 +13,36 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. 读取gif图片为data数据
-        let gifData = self.loadGifInLocal(gifName: "shopping")
-
-        // 2. 生成image图片数据
-        let images = self.createImage(gifData: gifData)
-
-        // 3. 把图片保存到本地沙盒
-        self.saveImagesToLocal(imageArray: images as? Array<UIImage>)
+        // 一、把shopping.gif动图转换成png格式的图片集，并把它们保存到沙盒中
+        let _ = self.transformGifToPngsAndSaveToLoacl(gifName: "shopping")
     }
 }
 
-// MARK: - actions
+// MARK: - GIF ==> png
 
 extension ViewController {
+    
+    /// 把GIF动图转换成png格式的图片集，并把它们保存到沙盒中
+    ///
+    /// Parameters: gifName: gif图名称
+    func transformGifToPngsAndSaveToLoacl(gifName: String) -> Bool {
+        
+        /// 1. 读取gif图片为data数据
+        let gifData = self.loadGifInLocal(gifName: gifName)
+        guard gifData != nil else {
+            return false
+        }
+        
+        // 2. 生成image图片数据
+        let images = self.createImage(gifData: gifData)
+        guard images?.count != 0 else {
+            return false
+        }
+        
+        // 3. 把图片保存到本地沙盒
+        return self.saveImagesToLocal(imageArray: images as? Array<UIImage>)
+    }
+    
     
     /// 从本地读取gif图片 ==> 生成data数据
     func loadGifInLocal(gifName: String?) -> Data? {
@@ -66,9 +82,9 @@ extension ViewController {
     }
     
     /// 将image图片保存到本地沙盒
-    func saveImagesToLocal(imageArray images: Array<UIImage>?) -> () {
+    func saveImagesToLocal(imageArray images: Array<UIImage>?) -> Bool {
         guard images?.count != 0 else {
-            return
+            return false
         }
         
         for image in images! {
@@ -80,6 +96,7 @@ extension ViewController {
             try? imageData.write(to: URL.init(fileURLWithPath: imagePath), options: [.atomic])
             print(imagePath)
         }
+        return true
     }
 }
 
