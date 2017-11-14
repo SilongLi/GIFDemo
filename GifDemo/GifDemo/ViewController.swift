@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 一、把shopping.gif动图转换成png格式的图片集，并把它们保存到沙盒中
+        // 一、把gif图转换成png格式的图片集，并保存到沙盒中
 //        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
         
-        // 二、把图片集合成gif动图
+        // 二、把图片集合成gif图
         let _ = self.transformImagesToGifAndSaveToDocument()
     }
 }
@@ -31,13 +31,13 @@ extension ViewController {
     /// 把图片集合成GIF图片，并保存到沙盒中
     func transformImagesToGifAndSaveToDocument() -> Bool {
         
-        // 1. 加载本地图片
+        // 1.加载本地图片
         let images: NSArray = self.loadImages()
         guard images.count > 0 else {
             return false
         }
         
-        // 2. 在Document目录中构建GIF文件
+        // 2.创建Gif图在Document中的保存路径
         let gifPath: String = self.creatGifPath()
         guard gifPath.characters.count > 0 else {
             return false
@@ -60,7 +60,7 @@ extension ViewController {
         return imageArray
     }
     
-    // 2. 在Document目录中构建GIF文件
+    // 2.创建Gif图在Document中的保存路径
     func creatGifPath() -> String {
         let docs = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let gifPath = docs[0] as String + "/refresh.gif"
@@ -109,7 +109,7 @@ extension ViewController {
     /// Parameters: gifName: gif图名称
     func transformGifToPngsAndSaveToLocal(gifName: String) -> Bool {
         
-        /// 1. 读取gif图片为data数据
+        /// 1.读取gif图片为data数据
         let gifData = self.loadGifInLocal(gifName: gifName)
         guard gifData != nil else {
             return false
