@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ImageIO
+import MobileCoreServices
 
 class ViewController: UIViewController {
 
@@ -14,18 +16,98 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 一、把shopping.gif动图转换成png格式的图片集，并把它们保存到沙盒中
-        let _ = self.transformGifToPngsAndSaveToLoacl(gifName: "shopping")
+//        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
+        
+        // 二、把图片集合成gif动图
+        let _ = self.transformImagesToGifAndSaveToDocument()
     }
 }
 
-// MARK: - GIF ==> png
+
+// MARK: - pngs ==> gif
+
+extension ViewController {
+    
+    /// 把图片集合成GIF图片，并保存到沙盒中
+    func transformImagesToGifAndSaveToDocument() -> Bool {
+        
+        // 1. 加载本地图片
+        let images: NSArray = self.loadImages()
+        guard images.count > 0 else {
+            return false
+        }
+        
+        // 2. 在Document目录中构建GIF文件
+        let gifPath: String = self.creatGifPath()
+        guard gifPath.characters.count > 0 else {
+            return false
+        }
+        
+        // 3.设置GIF属性，利用ImageIO编码GIF文件，并保存到沙盒中
+        return self.saveGifToDocument(imageArray: images, gifPath)
+    }
+    
+    
+    // 1. 加载本地图片
+    func loadImages() -> NSArray {
+        let imageArray: NSMutableArray = NSMutableArray()
+        for i in 1...25 {
+            let image = UIImage.init(named: "refresh_gif\(i).png")
+            if image != nil {
+                imageArray.add(image!)
+            }
+        }
+        return imageArray
+    }
+    
+    // 2. 在Document目录中构建GIF文件
+    func creatGifPath() -> String {
+        let docs = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let gifPath = docs[0] as String + "/refresh.gif"
+        print(gifPath)
+        return gifPath
+    }
+    
+    // 3.设置GIF属性，利用ImageIO编码GIF文件
+    func saveGifToDocument(imageArray images: NSArray, _ gifPath: String) -> Bool {
+        guard images.count > 0 &&
+             gifPath.characters.count > 0 else {
+            return false
+        }
+        let url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, gifPath as CFString, .cfurlposixPathStyle, false)
+        let destion = CGImageDestinationCreateWithURL(url!, kUTTypeGIF, images.count, nil)
+        
+        // 设置gif图片属性
+        // 设置每帧之间播放的时间0.1
+        let delayTime = [kCGImagePropertyGIFDelayTime as String:0.1]
+        let destDic   = [kCGImagePropertyGIFDictionary as String:delayTime]
+        // 依次为gif图像对象添加每一帧属性
+        for image in images {
+            CGImageDestinationAddImage(destion!, (image as AnyObject).cgImage!!, destDic as CFDictionary?)
+        }
+        
+        let propertiesDic: NSMutableDictionary = NSMutableDictionary()
+        propertiesDic.setValue(kCGImagePropertyColorModelRGB, forKey: kCGImagePropertyColorModel as String)
+        propertiesDic.setValue(16, forKey: kCGImagePropertyDepth as String)         // 设置图片的颜色深度
+        propertiesDic.setValue(1, forKey: kCGImagePropertyGIFLoopCount as String)   // 设置Gif执行次数
+        
+        let gitDestDic = [kCGImagePropertyGIFDictionary as String:propertiesDic]    // 为gif图像设置属性
+        CGImageDestinationSetProperties(destion!, gitDestDic as CFDictionary?)
+        CGImageDestinationFinalize(destion!)
+        return true
+    }
+}
+
+
+
+// MARK: - GIF ==> pngs
 
 extension ViewController {
     
     /// 把GIF动图转换成png格式的图片集，并把它们保存到沙盒中
     ///
     /// Parameters: gifName: gif图名称
-    func transformGifToPngsAndSaveToLoacl(gifName: String) -> Bool {
+    func transformGifToPngsAndSaveToLocal(gifName: String) -> Bool {
         
         /// 1. 读取gif图片为data数据
         let gifData = self.loadGifInLocal(gifName: gifName)
