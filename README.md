@@ -171,7 +171,8 @@
 ###主要三种方式：
 - 使用UIImageView直接展示；
 - 基于Timer定时器的逐帧动画效果；
-- 基于CADisplaylink的逐帧动画效果。
+- 基于CADisplaylink的逐帧动画效果；
+- 使用WebView直接加载gif图。
 
 ~~~Swift 
     let kImagesCount: NSInteger = 24   // 图片集个数
@@ -193,13 +194,18 @@
         imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 50)
         
         // 方法一：使用UIimageView播放gif图片
-        self.showGifByUIImageView(images: self.loadImages())
+//        self.showGifByUIImageView(images: self.loadImages())
         
         // 方法二：使用定时器Timer播放gif图片
 //        self.showGifByTimer()
         
         // 方法三：使用CADisplayLink播放gif图片
 //        self.showGifByCADisplayLink()
+
+        // 方式四：用WebView直接加载gif图
+        self.view.addSubview(self.webView)
+        self.webView.frame = self.view.bounds
+        self.showGifByWebView(gifName: "shopping")
     }
 ~~~
 
@@ -244,6 +250,21 @@ extension ViewController {
         return imageArray
     }
     
+    // 方式四：用WebView直接加载gif图，进行播放
+    func showGifByWebView(gifName: String) -> () {
+        guard gifName.characters.count > 0 else {
+            return
+        }
+        
+        let path: String = Bundle.main.path(forResource: gifName, ofType: "gif") ?? ""
+        let gifData = NSData.dataWithContentsOfMappedFile(path)
+        if gifData != nil {
+            self.webView.load(gifData as! Data, mimeType: "image/gif", textEncodingName: "", baseURL: NSURL() as URL)
+        } else {
+            print("GIF图名为：" + gifName + "的图不存在！")
+        }
+    }
+    
     @objc func refreshImageView() -> () {
         if index < 1 || index > kImagesCount {
             index = 1
@@ -253,5 +274,5 @@ extension ViewController {
         index += 1
     }
 }
-~~~
+~~~ 
 
