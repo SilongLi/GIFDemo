@@ -23,6 +23,15 @@ class ViewController: UIViewController {
     
     var index: NSInteger = 1
     
+    lazy var webView: UIWebView = {
+        let webView = UIWebView()
+        webView.scalesPageToFit = true
+        webView.scrollView.bounces = false
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.white
+        return webView
+    }()
+    
     
     
     override func viewDidLoad() {
@@ -42,13 +51,19 @@ class ViewController: UIViewController {
         imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 50)
         
         // 方法一：使用UIimageView播放gif图片
-        self.showGifByUIImageView(images: self.loadImages())
+//        self.showGifByUIImageView(images: self.loadImages())
         
         // 方法二：使用定时器Timer播放gif图片
 //        self.showGifByTimer()
         
         // 方法三：使用CADisplayLink播放gif图片
 //        self.showGifByCADisplayLink()
+        
+        
+        // 方式四：用WebView直接加载gif图
+        self.view.addSubview(self.webView)
+        self.webView.frame = self.view.bounds
+        self.showGifByWebView(gifName: "shopping")
     }
 }
 
@@ -235,6 +250,21 @@ extension ViewController {
         displayLink = CADisplayLink.init(target: self, selector: #selector(refreshImageView))
         displayLink?.frameInterval = 6
         displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+    
+    // 方式四：用WebView直接加载gif图，进行播放
+    func showGifByWebView(gifName: String) -> () {
+        guard gifName.characters.count > 0 else {
+            return
+        }
+        
+        let path: String = Bundle.main.path(forResource: gifName, ofType: "gif") ?? ""
+        let gifData = NSData.dataWithContentsOfMappedFile(path)
+        if gifData != nil {
+            self.webView.load(gifData as! Data, mimeType: "image/gif", textEncodingName: "", baseURL: NSURL() as URL)
+        } else {
+            print("GIF图名为：" + gifName + "的图不存在！")
+        }
     }
     
     @objc func refreshImageView() -> () {
