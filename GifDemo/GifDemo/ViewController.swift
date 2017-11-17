@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 一、把gif图转换成png格式的图片集，并保存到沙盒中
-//        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
+        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
         
         
         // 二、把图片集合成gif图
@@ -46,9 +46,9 @@ class ViewController: UIViewController {
         
         
         // 三、播放Gif图
-        self.view.addSubview(imageView)
-        imageView.center = self.view.center;
-        imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 50)
+//        self.view.addSubview(imageView)
+//        imageView.center = self.view.center;
+//        imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 50)
         
         // 方法一：使用UIimageView播放gif图片
 //        self.showGifByUIImageView(images: self.loadImages())
@@ -61,9 +61,9 @@ class ViewController: UIViewController {
         
         
         // 方式四：用WebView直接加载gif图
-        self.view.addSubview(self.webView)
-        self.webView.frame = self.view.bounds
-        self.showGifByWebView(gifName: "shopping")
+//        self.view.addSubview(self.webView)
+//        self.webView.frame = self.view.bounds
+//        self.showGifByWebView(gifName: "shopping")
     }
 }
 
