@@ -32,17 +32,16 @@ class ViewController: UIViewController {
         return webView
     }()
     
-    
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // 一、把gif图转换成png格式的图片集，并保存到沙盒中
-        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
+//        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
         
         
         // 二、把图片集合成gif图
-//        let _ = self.transformImagesToGifAndSaveToDocument()
+        let _ = self.transformImagesToGifAndSaveToDocument()
         
         
         // 三、播放Gif图
