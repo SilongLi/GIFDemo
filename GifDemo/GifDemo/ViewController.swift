@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         return webView
     }()
     
-     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,24 +40,30 @@ class ViewController: UIViewController {
 //        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
         
         
+        /////////////////// 华丽的分割线 /////////////////
+        
+        
         // 二、把图片集合成gif图
-        let _ = self.transformImagesToGifAndSaveToDocument()
+//        let _ = self.transformImagesToGifAndSaveToDocument()
+        
+        
+        
+        /////////////////// 华丽的分割线 /////////////////
         
         
         // 三、播放Gif图
-//        self.view.addSubview(imageView)
-//        imageView.center = self.view.center;
-//        imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 50)
+        self.view.addSubview(imageView)
+        imageView.center = self.view.center;
+        imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 60)
         
         // 方法一：使用UIimageView播放gif图片
-//        self.showGifByUIImageView(images: self.loadImages())
+        self.showGifByUIImageView(images: self.loadImages())
         
         // 方法二：使用定时器Timer播放gif图片
 //        self.showGifByTimer()
         
         // 方法三：使用CADisplayLink播放gif图片
 //        self.showGifByCADisplayLink()
-        
         
         // 方式四：用WebView直接加载gif图
 //        self.view.addSubview(self.webView)
@@ -165,7 +171,7 @@ extension ViewController {
         
         // 2.创建Gif图在Document中的保存路径
         let gifPath: String = self.creatGifPath()
-        guard gifPath.characters.count > 0 else {
+        guard gifPath.count > 0 else {
             return false
         }
         
@@ -178,7 +184,8 @@ extension ViewController {
     func loadImages() -> NSArray {
         let imageArray: NSMutableArray = NSMutableArray()
         for i in 1...kImagesCount {
-            let image = UIImage.init(named: "refresh_gif\(i).png")
+            let imagePath: String = Bundle.main.path(forResource: "refresh_gif\(i).png", ofType: nil) ?? ""
+            let image = UIImage.init(contentsOfFile: imagePath)
             if image != nil {
                 imageArray.add(image!)
             }
@@ -197,7 +204,7 @@ extension ViewController {
     // 3.设置GIF属性，利用ImageIO编码GIF文件
     func saveGifToDocument(imageArray images: NSArray, _ gifPath: String) -> Bool {
         guard images.count > 0 &&
-            gifPath.characters.count > 0 else {
+            gifPath.count > 0 else {
                 return false
         }
         let url = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, gifPath as CFString, .cfurlposixPathStyle, false)
@@ -231,7 +238,7 @@ extension ViewController {
     // 方法一：使用UIimageView播放gif图片
     func showGifByUIImageView(images: NSArray) -> () {
         if images.count > 0 {
-            self.imageView.animationImages = images as? [UIImage]
+            self.imageView.animationImages   = images as? [UIImage]
             self.imageView.animationDuration = 2.0
             self.imageView.animationRepeatCount = 300
             self.imageView.startAnimating()
@@ -253,14 +260,14 @@ extension ViewController {
     
     // 方式四：用WebView直接加载gif图，进行播放
     func showGifByWebView(gifName: String) -> () {
-        guard gifName.characters.count > 0 else {
+        guard gifName.count > 0 else {
             return
         }
         
         let path: String = Bundle.main.path(forResource: gifName, ofType: "gif") ?? ""
-        let gifData = NSData.dataWithContentsOfMappedFile(path)
+        let gifData = NSData.init(contentsOfFile: path)
         if gifData != nil {
-            self.webView.load(gifData as! Data, mimeType: "image/gif", textEncodingName: "", baseURL: NSURL() as URL)
+            self.webView.load(gifData! as Data, mimeType: "image/gif", textEncodingName: "", baseURL: NSURL() as URL)
         } else {
             print("GIF图名为：" + gifName + "的图不存在！")
         }
@@ -270,8 +277,9 @@ extension ViewController {
         if index < 1 || index > kImagesCount {
             index = 1
         }
-        let image: UIImage = UIImage.init(named: "refresh_gif\(index).png")!
-        imageView.image = image
+        
+        let imagePath: String = Bundle.main.path(forResource: "refresh_gif\(index).png", ofType: nil) ?? ""
+        imageView.image = UIImage.init(contentsOfFile: imagePath)
         index += 1
     }
 }
