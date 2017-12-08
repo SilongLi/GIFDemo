@@ -70,6 +70,13 @@ class ViewController: UIViewController {
 //        self.webView.frame = self.view.bounds
 //        self.showGifByWebView(gifName: "shopping")
     }
+    
+
+    /// 释放定时器
+    deinit {
+        timer?.invalidate()
+        timer = nil
+    }
 }
 
 // MARK: - GIF ==> pngs
