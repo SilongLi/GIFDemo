@@ -61,6 +61,7 @@
 		99D145871FA9B51C007B17A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D145851FA9B51C007B17A3 /* Main.storyboard */; };
 		99D145891FA9B51C007B17A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99D145881FA9B51C007B17A3 /* Assets.xcassets */; };
 		99D1458C1FA9B51C007B17A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D1458A1FA9B51C007B17A3 /* LaunchScreen.storyboard */; };
+		99DDA41A2015DC35003FF2F5 /* GifImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDA4192015DC35003FF2F5 /* GifImageOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		99D145881FA9B51C007B17A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99D1458B1FA9B51C007B17A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99D1458D1FA9B51C007B17A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99DDA4192015DC35003FF2F5 /* GifImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifImageOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +404,7 @@
 				995865691FD282B800DD8550 /* refreshImages */,
 				993509971FAB6A8300CEB2A5 /* shopping.gif */,
 				99D145811FA9B51C007B17A3 /* AppDelegate.swift */,
+				99DDA4192015DC35003FF2F5 /* GifImageOperation.swift */,
 				99D145831FA9B51C007B17A3 /* ViewController.swift */,
 				99D145851FA9B51C007B17A3 /* Main.storyboard */,
 				99D145881FA9B51C007B17A3 /* Assets.xcassets */,
@@ -533,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99D145841FA9B51C007B17A3 /* ViewController.swift in Sources */,
+				99DDA41A2015DC35003FF2F5 /* GifImageOperation.swift in Sources */,
 				99D145821FA9B51C007B17A3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

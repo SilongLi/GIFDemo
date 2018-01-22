@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 60)
         
         // 方法一：使用UIimageView播放gif图片
-        self.showGifByUIImageView(images: self.loadImages())
+//        self.showGifByUIImageView(images: self.loadImages())
         
         // 方法二：使用定时器Timer播放gif图片
 //        self.showGifByTimer()
@@ -69,6 +69,14 @@ class ViewController: UIViewController {
 //        self.view.addSubview(self.webView)
 //        self.webView.frame = self.view.bounds
 //        self.showGifByWebView(gifName: "shopping")
+        
+        // 方式五：用DispatchSource创建定时器，播放Gif图
+        imageView.frame = self.view.bounds
+        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
+        guard url != nil else {
+            return
+        }
+        self.showGifByDispatchSource(url: url!)
     }
     
 
@@ -278,6 +286,42 @@ extension ViewController {
         } else {
             print("GIF图名为：" + gifName + "的图不存在！")
         }
+    }
+    
+    // 方式五：用DispatchSource创建定时器，播放Gif图
+    /// 根据DispatchSource创建定时器，播放Gif图
+    ///
+    /// - Parameter url: 资源路径(网络或本地)
+    private func showGifByDispatchSource(url: String) {
+        guard url.count > 0 else {
+            return
+        }
+        var data: Data?
+        if self.checkUrlIsNetWorkData(urlString: url) {   // 网络资源
+            data = try? Data.init(contentsOf: URL.init(string: url)!)
+        } else {                                          // 本地资源
+            data = try? NSData.init(contentsOfFile: url) as Data
+        }
+        guard let imageData = data else { return }
+        let type = GifImageOperation.checkDataType(data: imageData)
+        if type == .gif {
+        let gifView = GifImageOperation.init(frame: imageView.bounds, gifData: imageData)
+            gifView.startAnimation()
+            imageView.addSubview(gifView)
+        } else {
+            imageView.image = UIImage.init(data: imageData)
+        }
+    }
+    
+    /// 验证url资源是网络还是本地资源
+    ///
+    /// - Parameter urlString: 资源路径
+    /// - Returns: 返回 true 表示为网络资源，false 为本地资源
+    private func checkUrlIsNetWorkData(urlString: String?) -> Bool {
+        guard urlString != nil else { return false }
+        let regex = "http(s)?:\\/\\/([\\w-]+\\.)+[\\w-]+(\\/[\\w- .\\/?%&=]*)?"
+        let predicate = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with:urlString)
     }
     
     @objc func refreshImageView() -> () {
