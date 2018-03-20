@@ -39,17 +39,12 @@ class ViewController: UIViewController {
         // 一、把gif图转换成png格式的图片集，并保存到沙盒中
 //        let _ = self.transformGifToPngsAndSaveToLocal(gifName: "shopping")
         
-        
         /////////////////// 华丽的分割线 /////////////////
-        
         
         // 二、把图片集合成gif图
 //        let _ = self.transformImagesToGifAndSaveToDocument()
         
-        
-        
         /////////////////// 华丽的分割线 /////////////////
-        
         
         // 三、播放Gif图
         self.view.addSubview(imageView)
@@ -168,8 +163,6 @@ extension ViewController {
         return true
     }
 }
-
-
 
 // MARK: - pngs ==> gif
 
@@ -334,9 +327,3 @@ extension ViewController {
         index += 1
     }
 }
-
-
-
-
-
-
