@@ -139,7 +139,7 @@ extension ViewController {
         let images: NSMutableArray   = NSMutableArray.init()
         for index in 0...gifImageCount-1 {
             let imageref: CGImage? = CGImageSourceCreateImageAtIndex(gifDataSource, index, nil)
-            let image: UIImage = UIImage.init(cgImage: imageref!, scale: UIScreen.main.scale, orientation: UIImageOrientation.up)
+            let image: UIImage = UIImage.init(cgImage: imageref!, scale: UIScreen.main.scale, orientation: UIImage.Orientation.up)
             images.add(image)
         }
         return images
@@ -153,7 +153,7 @@ extension ViewController {
         
         for image in images! {
             let index = images?.index(of: image)
-            let imageData: Data = UIImagePNGRepresentation(image)!
+            let imageData: Data = image.pngData()!
             let docs = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
             let documentsDirectory: String = docs[0] as String
             let imagePath = documentsDirectory + "/shopping\(index ?? 0)" + ".png"
