@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 60)
         
         // 方法一：使用UIimageView播放gif图片
-        self.showGifByUIImageView(images: self.loadImages())
+//        self.showGifByUIImageView(images: self.loadImages())
         
         // 方法二：使用定时器Timer播放gif图片
 //        self.showGifByTimer()
@@ -66,12 +66,12 @@ class ViewController: UIViewController {
 //        self.showGifByWebView(gifName: "shopping")
         
         // 方式五：用DispatchSource创建定时器，播放Gif图
-//        imageView.frame = self.view.bounds
-//        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
-//        guard url != nil else {
-//            return
-//        }
-//        self.showGifByDispatchSource(url: url!)
+        imageView.frame = self.view.bounds
+        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
+        guard url != nil else {
+            return
+        }
+        self.showGifByDispatchSource(url: url!)
     }
     
 
