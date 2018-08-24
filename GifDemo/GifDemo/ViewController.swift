@@ -61,17 +61,17 @@ class ViewController: UIViewController {
 //        self.showGifByCADisplayLink()
         
         // 方式四：用WebView直接加载gif图
-//        self.view.addSubview(self.webView)
-//        self.webView.frame = self.view.bounds
-//        self.showGifByWebView(gifName: "shopping")
+        self.view.addSubview(self.webView)
+        self.webView.frame = self.view.bounds
+        self.showGifByWebView(gifName: "shopping")
         
         // 方式五：用DispatchSource创建定时器，播放Gif图
-        imageView.frame = self.view.bounds
-        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
-        guard url != nil else {
-            return
-        }
-        self.showGifByDispatchSource(url: url!)
+//        imageView.frame = self.view.bounds
+//        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
+//        guard url != nil else {
+//            return
+//        }
+//        self.showGifByDispatchSource(url: url!)
     }
     
 
