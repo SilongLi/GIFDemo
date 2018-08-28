@@ -47,9 +47,9 @@ class ViewController: UIViewController {
         /////////////////// 华丽的分割线 /////////////////
         
         // 三、播放Gif图
-        self.view.addSubview(imageView)
-        imageView.center = self.view.center;
-        imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 60)
+//        self.view.addSubview(imageView)
+//        imageView.center = self.view.center;
+//        imageView.bounds.size = CGSize.init(width: self.view.bounds.size.width, height: 60)
         
         // 方法一：使用UIimageView播放gif图片
         self.showGifByUIImageView(images: self.loadImages())
@@ -66,12 +66,12 @@ class ViewController: UIViewController {
 //        self.showGifByWebView(gifName: "shopping")
         
         // 方式五：用DispatchSource创建定时器，播放Gif图
-//        imageView.frame = self.view.bounds
-//        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
-//        guard url != nil else {
-//            return
-//        }
-//        self.showGifByDispatchSource(url: url!)
+        imageView.frame = self.view.bounds
+        let url = Bundle.main.path(forResource: "shopping.gif", ofType: nil)
+        guard url != nil else {
+            return
+        }
+        self.showGifByDispatchSource(url: url!)
     }
     
 
